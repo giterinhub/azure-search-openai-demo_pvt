@@ -1,3 +1,4 @@
+// = PFX
 targetScope = 'subscription'
 
 @minLength(1)
@@ -51,7 +52,7 @@ param keyVaultServiceName string = ''
 param searchServiceSecretName string = 'searchServiceSecret'
 
 @description('Location for the OpenAI resource group')
-@allowed([  'canadaeast', 'eastus', 'eastus2', 'francecentral', 'switzerlandnorth', 'uksouth', 'japaneast', 'northcentralus', 'australiaeast', 'swedencentral'  ])
+@allowed([ 'canadaeast', 'eastus', 'eastus2', 'francecentral', 'switzerlandnorth', 'uksouth', 'japaneast', 'northcentralus', 'australiaeast', 'swedencentral' ])
 @metadata({
   azd: {
     type: 'location'
@@ -231,6 +232,7 @@ module backend 'core/host/appservice.bicep' = {
     scmDoBuildDuringDeployment: true
     managedIdentity: true
     allowedOrigins: [ allowedOrigin ]
+    allowInboundNetworkRange: allowedIp
     clientAppId: clientAppId
     serverAppId: serverAppId
     clientSecretSettingName: !empty(clientAppSecret) ? 'AZURE_CLIENT_APP_SECRET' : ''
