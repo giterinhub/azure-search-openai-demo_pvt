@@ -39,6 +39,7 @@ resource privateEndpoint 'Microsoft.Network/privateEndpoints@2021-02-01' = {
       }
     ]
   }
+  
   resource privateDnsZoneGroup 'privateDnsZoneGroups' = {
     name: '${name}-group'
     properties: {

@@ -356,6 +356,7 @@ module documentIntelligence 'core/ai/cognitiveservices.bicep' = {
     sku: {
       name: documentIntelligenceSkuName
     }
+    allowedIpRules: allowedIpRules
   }
 }
 
@@ -595,7 +596,7 @@ module isolation 'network-isolation.bicep' = if (usePrivateEndpoint) {
     searchServiceId: searchService.outputs.id
     searchServiceName: searchService.outputs.name
     openAiId: openAi.outputs.id
-    formRecognizerId: documentIntelligence.outputs.id
+    documentIntelligenceId: documentIntelligence.outputs.id
   }
 }
 

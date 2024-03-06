@@ -24,8 +24,8 @@ param searchServiceId string
 @description('The ID of an existing Open AI resource to connect to the VNet')
 param openAiId string
 
-@description('The ID of an existing Form Recognizer resource to connect to the VNet')
-param formRecognizerId string
+@description('The ID of an existing Document Intelligence resource to connect to the VNet')
+param documentIntelligenceId string
 
 @description('The name of an existing Search Service to connect to the VNet')
 param searchServiceName string
@@ -162,14 +162,14 @@ module openAiPrivateEndpoint './core/networking/private-endpoint.bicep' = {
   }
 }
 
-module formRecognizerPrivateEndpoint './core/networking/private-endpoint.bicep' = {
-  name: 'formrecognizerprivateendpoint'
+module documentIntelligencePrivateEndpoint './core/networking/private-endpoint.bicep' = {
+  name: 'documentintelligenceprivateendpoint'
   params: {
     location: location
-    name: '${abbrs.cognitiveServicesFormRecognizer}${abbrs.privateEndpoint}${resourceToken}'
+    name: '${abbrs.cognitiveServicesDocumentIntelligence}${abbrs.privateEndpoint}${resourceToken}'
     tags: tags
     subnetId: vnet.outputs.vnetSubnets[0].id
-    serviceId: formRecognizerId
+    serviceId: documentIntelligenceId
     groupIds: [ 'account' ]
     dnsZoneId: cognitiveservicesDnsZone.outputs.id
   }
