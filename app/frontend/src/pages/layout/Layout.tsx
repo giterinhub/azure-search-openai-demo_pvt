@@ -1,4 +1,5 @@
 import { Outlet, NavLink, Link } from "react-router-dom";
+import { useMsal } from "@azure/msal-react";
 
 import github from "../../assets/github.svg";
 
@@ -9,6 +10,10 @@ import { useLogin } from "../../authConfig";
 import { LoginButton } from "../../components/LoginButton";
 
 const Layout = () => {
+    const { instance } = useMsal();
+    const activeAccount = instance.getActiveAccount();
+    const xms_pl = activeAccount?.idTokenClaims?.xms_pl;
+
     return (
         <div className={styles.layout}>
             <header className={styles.header} role={"banner"}>
@@ -44,6 +49,7 @@ const Layout = () => {
                     </nav>
                     <h4 className={styles.headerRightText}>Azure OpenAI + AI Search</h4>
                     {useLogin && <LoginButton />}
+                    {xms_pl && <h4 className={styles.headerRightText}>Preferred Language: {xms_pl}</h4>}
                 </div>
             </header>
 
